@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "飲む",
+    "slug": "nomu",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "platforms": ["ios"],
+    "version": "1.0.0",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#7f030e"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
