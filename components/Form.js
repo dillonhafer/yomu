@@ -58,6 +58,7 @@ export class Input extends Component {
   render() {
     const {
       type = 'text',
+      editable = true,
       errors,
       touched,
       label,
@@ -88,14 +89,25 @@ export class Input extends Component {
             this.input = i;
           }}
           placeholder={placeholder}
-          style={styles.input}
+          style={[
+            styles.input,
+            editable ? {} : { opacity: 0.6, color: '#aaa' },
+          ]}
+          editable={editable}
           {...rest}
         />
       );
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <Text style={labelStyles}>{label}</Text>
+          <Text
+            style={[
+              labelStyles,
+              editable ? {} : { opacity: 0.6, color: '#aaa' },
+            ]}
+          >
+            {label}
+          </Text>
           {input}
         </View>
         {showErrors && <Text style={styles.error}>{errors}</Text>}

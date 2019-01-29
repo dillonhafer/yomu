@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // FORM
+import { BarCodeScanner, Permissions } from 'expo';
 import { InputGroup, Input, Line, Button } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -34,6 +35,10 @@ class NewBookScreen extends Component {
     };
   };
 
+  state = {
+    scanBarCode: false,
+  };
+
   inputs = {};
 
   focusNextField = key => {
@@ -45,6 +50,7 @@ class NewBookScreen extends Component {
     touched,
     errors,
     isSubmitting,
+    setFieldValue,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -76,7 +82,7 @@ class NewBookScreen extends Component {
           <Line />
           <Input
             label="Author"
-            placeholder="John Smith"
+            placeholder="Author Name"
             onChangeText={handleChange('author')}
             value={values.author}
             ref={input => {
@@ -111,6 +117,22 @@ class NewBookScreen extends Component {
           disabled={isSubmitting}
           title="Add Book"
         />
+
+        <Button
+          onPress={() => {
+            this.setState({ scanBarCode: true });
+          }}
+          title="Scan Barcode"
+        />
+        {this.state.scanBarCode && (
+          <BarCodeScanner
+            onBarCodeScanned={({ data }) => {
+              this.setState({ scanBarCode: false });
+              setFieldValue('isbn', data);
+            }}
+            style={StyleSheet.absoluteFill}
+          />
+        )}
       </View>
     );
   };

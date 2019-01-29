@@ -77,34 +77,19 @@ class EditBookScreen extends Component {
           <Input
             label="Author"
             value={values.author}
-            placeholder="John Smith"
+            placeholder="Author Name"
             ref={input => {
               this.inputs['author'] = input;
             }}
-            onSubmitEditing={() => {
-              this.focusNextField('isbn');
-            }}
-            returnKeyType="next"
+            onSubmitEditing={handleSubmit}
+            returnKeyType="done"
             onChangeText={handleChange('author')}
             onBlur={handleBlur('author')}
             errors={errors.author}
             touched={touched.author}
           />
           <Line />
-          <Input
-            label="ISBN"
-            placeholder="0000000000"
-            value={values.isbn}
-            ref={input => {
-              this.inputs['isbn'] = input;
-            }}
-            onSubmitEditing={handleSubmit}
-            returnKeyType="done"
-            onChangeText={handleChange('isbn')}
-            onBlur={handleBlur('isbn')}
-            errors={errors.isbn}
-            touched={touched.isbn}
-          />
+          <Input label="ISBN" editable={false} value={values.isbn} />
         </InputGroup>
 
         <Button
