@@ -17,7 +17,7 @@
       "fallbackToCacheTimeout": 0
     },
     "ios": {
-      "buildNumber": "1",
+      "buildNumber": "0",
       "supportsTablet": true,
       "bundleIdentifier": "com.dillonhafer.read",
       "appStoreUrl": "https://itunes.apple.com/us/app/reading-progress/id1450820446?mt=8",
