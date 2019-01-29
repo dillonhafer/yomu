@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, DatePickerIOS } from 'react-native';
+import { View, Text, Alert, StyleSheet, DatePickerIOS } from 'react-native';
 
+import { Notifications } from 'expo';
 // FORM
 import {
   DoneAccessory,
@@ -12,6 +13,14 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
+
+const dateString = date => {
+  let d = date;
+  if (typeof d === 'string') {
+    d = new Date(date);
+  }
+  return [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
+};
 
 const initialBookValues = {
   pages: 0,
@@ -102,7 +111,46 @@ class LogPagesReadScreen extends Component {
     );
   };
 
-  handleSubmit = values => {
+  rescheduleNotifications = async () => {
+    if (!this.props.reminderEnabled) {
+      return;
+    }
+
+    const date = new Date(this.props.reminderTime);
+    date.setDate(date.getDate() + 1);
+
+    await Notifications.cancelAllScheduledNotificationsAsync();
+    await Notifications.scheduleLocalNotificationAsync(
+      {
+        title: '📖 Reading Reminder',
+        body: `📚 Don't forget to read today!!!`,
+        ios: { sound: true },
+      },
+      {
+        time: date,
+        repeat: 'day',
+      },
+    );
+  };
+
+  handleSubmit = async values => {
+    const today = dateString(new Date());
+    const goal = parseInt(this.props.pageGoal, 10);
+    const currentPageCount = this.props.readingLogs
+      .filter(l => dateString(l.date) === today)
+      .reduce((acc, l) => acc + parseInt(l.pagesRead, 10), 0);
+
+    if (currentPageCount < goal) {
+      if (dateString(values.date) === today) {
+        if (currentPageCount + parseInt(values.pagesRead, 10) >= goal) {
+          await this.rescheduleNotifications();
+          Alert.alert('🎉 You Did It! 🎉', 'You met your daily reading goal!', [
+            { text: 'Thanks' },
+          ]);
+        }
+      }
+    }
+
     this.props.logPages(values);
     this.props.navigation.goBack();
   };
