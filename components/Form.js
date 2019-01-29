@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Button as RNButton,
   View,
@@ -6,8 +6,8 @@ import {
   TextInput,
   StyleSheet,
   Switch,
-  DatePickerIOS
-} from "react-native";
+  DatePickerIOS,
+} from 'react-native';
 
 export const InputGroup = ({ label, children }) => {
   return (
@@ -20,14 +20,19 @@ export const InputGroup = ({ label, children }) => {
 
 export const Line = () => <View style={styles.line} />;
 
-export const Button = ({ title, onPress, disabled = false }) => (
+export const Button = ({ color, title, onPress, disabled = false }) => (
   <View style={styles.button}>
-    <RNButton onPress={onPress} disabled={disabled} title={title} />
+    <RNButton
+      onPress={onPress}
+      color={color}
+      disabled={disabled}
+      title={title}
+    />
   </View>
 );
 
 export const Input = ({
-  type = "text",
+  type = 'text',
   errors,
   touched,
   label,
@@ -43,7 +48,7 @@ export const Input = ({
     : styles.label;
 
   const input =
-    type === "switch" ? (
+    type === 'switch' ? (
       <Switch
         style={{ marginVertical: 3 }}
         onValueChange={onChange}
@@ -73,47 +78,47 @@ export const Input = ({
 const styles = StyleSheet.create({
   container: {
     paddingRight: 12,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
   },
   inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   label: {},
-  input: { flex: 1, paddingVertical: 10, textAlign: "right", marginLeft: 12 },
+  input: { flex: 1, paddingVertical: 10, textAlign: 'right', marginLeft: 12 },
   error: {
     paddingVertical: 5,
-    color: "red"
+    color: 'red',
   },
   labelError: {
-    color: "red"
+    color: 'red',
   },
   line: {
-    backgroundColor: "#ccc",
-    height: StyleSheet.hairlineWidth
+    backgroundColor: '#ccc',
+    height: StyleSheet.hairlineWidth,
   },
   button: {
     marginTop: 10,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#ccc",
-    borderLeftColor: "#fff",
-    borderRightColor: "#fff",
-    backgroundColor: "#fff"
+    borderColor: '#ccc',
+    borderLeftColor: '#fff',
+    borderRightColor: '#fff',
+    backgroundColor: '#fff',
   },
   inputGroupLabel: {
     marginLeft: 12,
     marginTop: 12,
     marginBottom: 6,
     fontSize: 12,
-    color: "#666"
+    color: '#666',
   },
   inputGroupContainer: {
-    backgroundColor: "#fff",
-    borderColor: "#ccc",
-    borderLeftColor: "#fff",
-    borderRightColor: "#fff",
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderLeftColor: '#fff',
+    borderRightColor: '#fff',
     borderWidth: StyleSheet.hairlineWidth,
-    paddingLeft: 12
-  }
+    paddingLeft: 12,
+  },
 });

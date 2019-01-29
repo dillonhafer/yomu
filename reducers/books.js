@@ -3,13 +3,14 @@ import {
   BOOKS_LOADED,
   BOOK_UPDATED,
   LOG_PAGES,
-  LOAD_BOOKS
-} from "../constants/action-types";
+  LOAD_BOOKS,
+  BOOK_DELETED,
+} from '../constants/action-types';
 
 const initialState = {
   books: [],
   readingLogs: [],
-  booksLoading: true
+  booksLoading: true,
 };
 
 export default function booksState(state = initialState, action) {
@@ -19,12 +20,17 @@ export default function booksState(state = initialState, action) {
     case LOAD_BOOKS:
       return {
         ...state,
-        booksLoading: true
+        booksLoading: true,
+      };
+    case BOOK_DELETED:
+      return {
+        ...state,
+        books: state.books.filter(b => b.isbn !== action.book.isbn),
       };
     case BOOK_ADDED:
       return {
         ...state,
-        books: [...state.books, action.book]
+        books: [...state.books, action.book],
       };
     case BOOK_UPDATED:
       return {
@@ -34,13 +40,13 @@ export default function booksState(state = initialState, action) {
             return action.book;
           }
           return b;
-        })
+        }),
       };
     case BOOKS_LOADED:
       return {
         ...state,
         books: action.books,
-        booksLoading: false
+        booksLoading: false,
       };
     default:
       return state;

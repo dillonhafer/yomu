@@ -87,8 +87,18 @@ class EditBookScreen extends Component {
           disabled={isSubmitting}
           title="Update Book"
         />
+
+        <View>
+          <Button color="red" onPress={this.handleDelete} title="Delete Book" />
+        </View>
       </View>
     );
+  };
+
+  handleDelete = () => {
+    const book = this.props.navigation.getParam('book');
+    this.props.deleteBook(book);
+    this.props.navigation.goBack();
   };
 
   handleSubmit = values => {
