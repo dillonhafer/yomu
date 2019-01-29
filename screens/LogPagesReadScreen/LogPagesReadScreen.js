@@ -85,6 +85,7 @@ class LogPagesReadScreen extends Component {
           <Line />
           <DatePickerIOS
             date={values.date}
+            maximumDate={new Date()}
             mode="date"
             onDateChange={date => {
               setFieldValue('date', date);
