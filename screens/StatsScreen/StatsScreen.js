@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 32,
   },
   iconContainer: {
     alignItems: 'center',
