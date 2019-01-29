@@ -6,8 +6,27 @@ import {
   TextInput,
   StyleSheet,
   Switch,
+  InputAccessoryView,
   DatePickerIOS,
+  Keyboard,
 } from 'react-native';
+
+export const DoneAccessory = ({
+  inputAccessoryViewID,
+  onPress = Keyboard.dismiss,
+}) => (
+  <InputAccessoryView nativeID={inputAccessoryViewID}>
+    <View
+      style={{
+        backgroundColor: '#eee',
+        alignItems: 'flex-end',
+        paddingRight: 12,
+      }}
+    >
+      <RNButton onPress={onPress} title="Done" />
+    </View>
+  </InputAccessoryView>
+);
 
 export const InputGroup = ({ label, children }) => {
   return (

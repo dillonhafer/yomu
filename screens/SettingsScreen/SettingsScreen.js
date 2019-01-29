@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 
 // FORM
-import { InputGroup, Input, Line, Button } from 'app/components/Form';
+import {
+  InputGroup,
+  Input,
+  Line,
+  Button,
+  DoneAccessory,
+} from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
@@ -45,6 +51,7 @@ export default class SettingsScreen extends React.Component {
         <InputGroup label="settings">
           <Input
             label="Page Goal"
+            inputAccessoryViewID={'done'}
             value={String(values.pageGoal)}
             placeholder="10"
             keyboardType="phone-pad"
@@ -81,6 +88,7 @@ export default class SettingsScreen extends React.Component {
           </View>
         </InputGroup>
         <Button onPress={handleSubmit} disabled={isSubmitting} title="Save" />
+        <DoneAccessory inputAccessoryViewID="done" />
       </View>
     );
   };
