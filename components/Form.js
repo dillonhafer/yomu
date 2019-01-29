@@ -50,49 +50,59 @@ export const Button = ({ color, title, onPress, disabled = false }) => (
   </View>
 );
 
-export const Input = ({
-  type = 'text',
-  errors,
-  touched,
-  label,
-  value,
-  placeholder,
-  onBlur,
-  onChange,
-  ...rest
-}) => {
-  const showErrors = errors && touched;
-  const labelStyles = showErrors
-    ? [styles.label, styles.labelError]
-    : styles.label;
+export class Input extends Component {
+  focus = () => {
+    this.input.focus();
+  };
 
-  const input =
-    type === 'switch' ? (
-      <Switch
-        style={{ marginVertical: 3 }}
-        onValueChange={onChange}
-        value={value}
-      />
-    ) : (
-      <TextInput
-        onChangeText={onChange}
-        onBlur={onBlur}
-        value={value}
-        placeholder={placeholder}
-        style={styles.input}
-        {...rest}
-      />
-    );
-  return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={labelStyles}>{label}</Text>
-        {input}
+  render() {
+    const {
+      type = 'text',
+      errors,
+      touched,
+      label,
+      value,
+      placeholder,
+      onBlur,
+      onChange,
+      ...rest
+    } = this.props;
+    const showErrors = errors && touched;
+    const labelStyles = showErrors
+      ? [styles.label, styles.labelError]
+      : styles.label;
+
+    const input =
+      type === 'switch' ? (
+        <Switch
+          style={{ marginVertical: 3 }}
+          onValueChange={onChange}
+          value={value}
+        />
+      ) : (
+        <TextInput
+          onChangeText={onChange}
+          onBlur={onBlur}
+          value={value}
+          ref={i => {
+            this.input = i;
+          }}
+          placeholder={placeholder}
+          style={styles.input}
+          {...rest}
+        />
+      );
+    return (
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Text style={labelStyles}>{label}</Text>
+          {input}
+        </View>
+        {showErrors && <Text style={styles.error}>{errors}</Text>}
       </View>
-      {showErrors && <Text style={styles.error}>{errors}</Text>}
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

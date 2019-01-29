@@ -34,6 +34,12 @@ class EditBookScreen extends Component {
     };
   };
 
+  inputs = {};
+
+  focusNextField = key => {
+    this.inputs[key].focus();
+  };
+
   renderForm = ({
     values,
     touched,
@@ -55,6 +61,13 @@ class EditBookScreen extends Component {
             label="Title"
             value={values.title}
             placeholder="Title"
+            ref={input => {
+              this.inputs['title'] = input;
+            }}
+            onSubmitEditing={() => {
+              this.focusNextField('author');
+            }}
+            returnKeyType="next"
             onChangeText={handleChange('title')}
             onBlur={handleBlur('title')}
             errors={errors.title}
@@ -65,6 +78,13 @@ class EditBookScreen extends Component {
             label="Author"
             value={values.author}
             placeholder="John Smith"
+            ref={input => {
+              this.inputs['author'] = input;
+            }}
+            onSubmitEditing={() => {
+              this.focusNextField('isbn');
+            }}
+            returnKeyType="next"
             onChangeText={handleChange('author')}
             onBlur={handleBlur('author')}
             errors={errors.author}
@@ -75,6 +95,11 @@ class EditBookScreen extends Component {
             label="ISBN"
             placeholder="0000000000"
             value={values.isbn}
+            ref={input => {
+              this.inputs['isbn'] = input;
+            }}
+            onSubmitEditing={handleSubmit}
+            returnKeyType="done"
             onChangeText={handleChange('isbn')}
             onBlur={handleBlur('isbn')}
             errors={errors.isbn}
