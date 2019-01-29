@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   LayoutAnimation,
+  ActionSheetIOS,
   View,
   Text,
   StyleSheet,
@@ -29,6 +30,26 @@ const settingsValidations = Yup.object().shape({
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Settings',
+  };
+
+  handleOnReset = () => {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        title: 'Erase All Data',
+        message: 'This will erase everything. Are you sure?',
+        options: ['Cancel', '🧨 Erase Everything!'],
+        cancelButtonIndex: 0,
+        destructiveButtonIndex: 1,
+      },
+      buttonIndex => {
+        switch (buttonIndex) {
+          case 1:
+            this.props.reset();
+            break;
+          default:
+        }
+      },
+    );
   };
 
   renderForm = ({
@@ -79,7 +100,7 @@ export default class SettingsScreen extends React.Component {
             }}
           >
             <DatePickerIOS
-              date={values.reminderTime}
+              date={new Date(values.reminderTime)}
               onDateChange={d => {
                 setFieldValue('reminderTime', d);
               }}
@@ -88,6 +109,11 @@ export default class SettingsScreen extends React.Component {
           </View>
         </InputGroup>
         <Button onPress={handleSubmit} disabled={isSubmitting} title="Save" />
+        <Button
+          onPress={this.handleOnReset}
+          color="red"
+          title="RESET ALL DATA"
+        />
         <DoneAccessory inputAccessoryViewID="done" />
       </View>
     );

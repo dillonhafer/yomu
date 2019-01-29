@@ -48,6 +48,8 @@ export default function booksState(state = initialState, action) {
         books: action.books,
         booksLoading: false,
       };
+    case 'RESET':
+      return initialState;
     default:
       return state;
   }

@@ -12,7 +12,11 @@ import { Octicons } from '@expo/vector-icons';
 
 const weekDays = ['S', 'M', 'T', 'W', 'R', 'F', 'S'];
 const dateString = date => {
-  return [date.getFullYear(), date.getMonth(), date.getDate()].join('-');
+  let d = date;
+  if (typeof d === 'string') {
+    d = new Date(date);
+  }
+  return [d.getFullYear(), d.getMonth(), d.getDate()].join('-');
 };
 
 export default class StatsScreen extends React.Component {
