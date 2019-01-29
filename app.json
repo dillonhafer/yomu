@@ -2,8 +2,9 @@
   "expo": {
     "name": "飲む",
     "slug": "nomu",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
+    "scheme": "nomu",
     "platforms": ["ios"],
     "version": "1.0.0",
     "icon": "./assets/images/icon.png",
@@ -15,9 +16,19 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
-    }
+      "buildNumber": "1",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dillonhafer.read",
+      "appStoreUrl": "https://itunes.apple.com/us/app/reading-progress/id1450820446?mt=8",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "nomu only uses the photo library to allow you to upload a book cover",
+        "NSLocationAlwaysUsageDescription": "nomu does not use your location. We use Expo to build but we do not use the location APIs they provide."
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "assetBundlePatterns": ["**/*"]
   }
 }
