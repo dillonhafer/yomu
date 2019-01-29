@@ -22,7 +22,7 @@ const createTmpDir = () => {
 // Get expo download Url
 const getDownloadUrl = () => {
   task(`Getting download url`);
-  downloadUrl = execSync('exp url:ipa');
+  downloadUrl = execSync('expo-cli url:ipa');
 };
 
 // Download from expo
