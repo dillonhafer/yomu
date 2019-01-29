@@ -20,6 +20,7 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
+import { Permissions, Constants, Notifications } from 'expo';
 
 const settingsValidations = Yup.object().shape({
   pageGoal: Yup.number()
@@ -31,6 +32,14 @@ export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Settings',
   };
+
+  state = {
+    notificationsDisabled: true,
+  };
+
+  componentDidMount() {
+    Permissions.askAsync(Permissions.NOTIFICATIONS);
+  }
 
   handleOnReset = () => {
     ActionSheetIOS.showActionSheetWithOptions(
@@ -102,6 +111,7 @@ export default class SettingsScreen extends React.Component {
             <DatePickerIOS
               date={new Date(values.reminderTime)}
               onDateChange={d => {
+                d.setSeconds(0);
                 setFieldValue('reminderTime', d);
               }}
               mode="time"
@@ -119,7 +129,29 @@ export default class SettingsScreen extends React.Component {
     );
   };
 
-  handleSubmit = (values, { setSubmitting }) => {
+  handleSubmit = async (values, { setSubmitting }) => {
+    if (
+      values.reminderEnabled !== this.props.settings.reminderEnabled ||
+      values.reminderTime !== this.props.settings.reminderTime
+    ) {
+      if (values.reminderEnabled) {
+        await Notifications.cancelAllScheduledNotificationsAsync();
+        await Notifications.scheduleLocalNotificationAsync(
+          {
+            title: '📖 Reading Reminder',
+            body: `📚 Don't forget to read today!!!`,
+            ios: { sound: true },
+          },
+          {
+            time: values.reminderTime,
+            repeat: 'day',
+          },
+        );
+      } else {
+        await Notifications.cancelAllScheduledNotificationsAsync();
+      }
+    }
+
     this.props.updateSettings(values);
     setSubmitting(false);
   };
