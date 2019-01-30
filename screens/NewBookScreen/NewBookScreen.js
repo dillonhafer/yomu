@@ -20,11 +20,14 @@ const initialBookValues = {
   isbn: '',
 };
 
-const bookValidations = Yup.object().shape({
-  title: Yup.string().required('Title is required'),
-  author: Yup.string().required('Author is required'),
-  isbn: Yup.string().required('ISBN is required'),
-});
+const bookValidations = isbns =>
+  Yup.object().shape({
+    title: Yup.string().required('Title is required'),
+    author: Yup.string().required('Author is required'),
+    isbn: Yup.string()
+      .notOneOf(isbns, 'ISBN already in use')
+      .required('ISBN is required'),
+  });
 
 class NewBookScreen extends Component {
   static navigationOptions = () => {
@@ -153,7 +156,7 @@ class NewBookScreen extends Component {
         <Formik
           initialValues={initialBookValues}
           onSubmit={this.handleSubmit}
-          validationSchema={bookValidations}
+          validationSchema={bookValidations(this.props.books.map(b => b.isbn))}
           render={this.renderForm}
         />
       </FormikContainer>

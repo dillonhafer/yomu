@@ -151,7 +151,8 @@ const styles = StyleSheet.create({
   label: {},
   input: { flex: 1, paddingVertical: 10, textAlign: 'right', marginLeft: 12 },
   error: {
-    paddingVertical: 5,
+    fontSize: 10,
+    paddingBottom: 5,
     color: 'red',
   },
   labelError: {
