@@ -101,11 +101,7 @@ export default class SettingsScreen extends Component {
             errors={errors.reminderEnabled}
             touched={touched.reminderEnabled}
           />
-          <View
-            style={{
-              ...(values.reminderEnabled ? {} : { height: 0, opacity: 0 }),
-            }}
-          >
+          {values.reminderEnabled && (
             <DatePickerIOS
               date={new Date(values.reminderTime)}
               locale={locale}
@@ -115,7 +111,7 @@ export default class SettingsScreen extends Component {
               }}
               mode="time"
             />
-          </View>
+          )}
         </InputGroup>
         <Button
           onPress={handleSubmit}
