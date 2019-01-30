@@ -18,5 +18,8 @@
   "pagesReadRequired": "Pages Read is required",
   "logReading": "Log Reading",
   "thanks": "Thanks",
-  "congrats": "🎉 You did it! 🎉"
+  "congrats": "🎉 You did it! 🎉",
+  "weeklyStreak": "Weekly Streak",
+  "noBooks": "You don't have any books yet!",
+  "pressPlus": "Press + to add one"
 }

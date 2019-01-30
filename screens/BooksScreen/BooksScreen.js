@@ -39,8 +39,8 @@ class BooksScreen extends React.Component {
 
   renderEmpty = () => (
     <View style={styles.emptyContainer}>
-      <Text>You don't have any books yet!</Text>
-      <Text>Press + to add one</Text>
+      <Text>{i18n.t('noBooks')}</Text>
+      <Text>{i18n.t('pressPlus')}</Text>
     </View>
   );
 

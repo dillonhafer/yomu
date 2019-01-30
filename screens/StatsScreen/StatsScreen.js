@@ -9,7 +9,7 @@ import {
 
 import Colors from 'app/constants/Colors';
 import { Octicons } from '@expo/vector-icons';
-import { weekDays } from 'app/I18n';
+import i18n, { weekDays } from 'app/I18n';
 
 const dateString = date => {
   let d = date;
@@ -40,7 +40,7 @@ export default class StatsScreen extends React.Component {
                   marginVertical: 8,
                 }}
               >
-                Weekly Streak
+                {i18n.t('weeklyStreak')}
               </Text>
             </View>
 
@@ -115,20 +115,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
   weekStreak: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
   },
 });
