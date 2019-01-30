@@ -53,6 +53,7 @@ class BookRow extends Component {
               <Text style={{ fontSize: 13, color: '#777' }}>
                 {i18n.t('by')}
                 {book.author}
+                {i18n.t('byJP')}
               </Text>
             </View>
           </View>
