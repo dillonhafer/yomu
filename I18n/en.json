@@ -21,5 +21,12 @@
   "congrats": "🎉 You did it! 🎉",
   "weeklyStreak": "Weekly Streak",
   "noBooks": "You don't have any books yet!",
-  "pressPlus": "Press + to add one"
+  "pressPlus": "Press + to add one",
+  "resetData": "RESET ALL DATA",
+  "eraseAllData": "Erase All Data",
+  "eraseEverything": "🧨 Erase Everything!",
+  "areYouSure": "This will erase everything. Are you sure?",
+  "pageGoal": "Page Goal",
+  "dailyReminder": "Daily Reminder",
+  "save": "Save"
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import i18n, { locale } from 'app/I18n';
 import {
   LayoutAnimation,
   ActionSheetIOS,
   View,
-  Text,
   StyleSheet,
-  Switch,
   DatePickerIOS,
 } from 'react-native';
 
@@ -20,7 +19,7 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
-import { Permissions, Constants, Notifications } from 'expo';
+import { Permissions, Notifications } from 'expo';
 
 const settingsValidations = Yup.object().shape({
   pageGoal: Yup.number()
@@ -28,9 +27,9 @@ const settingsValidations = Yup.object().shape({
     .required('Page Goal is required'),
 });
 
-export default class SettingsScreen extends React.Component {
+export default class SettingsScreen extends Component {
   static navigationOptions = {
-    title: 'Settings',
+    title: i18n.t('settings'),
   };
 
   state = {
@@ -44,9 +43,9 @@ export default class SettingsScreen extends React.Component {
   handleOnReset = () => {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        title: 'Erase All Data',
-        message: 'This will erase everything. Are you sure?',
-        options: ['Cancel', '🧨 Erase Everything!'],
+        title: i18n.t('eraseAllData'),
+        message: i18n.t('areYouSure'),
+        options: [i18n.t('cancel'), i18n.t('eraseEverything')],
         cancelButtonIndex: 0,
         destructiveButtonIndex: 1,
       },
@@ -70,7 +69,6 @@ export default class SettingsScreen extends React.Component {
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
   }) => {
     return (
       <View
@@ -78,9 +76,9 @@ export default class SettingsScreen extends React.Component {
           flex: 1,
         }}
       >
-        <InputGroup label="settings">
+        <InputGroup label={i18n.t('settings')}>
           <Input
-            label="Page Goal"
+            label={i18n.t('pageGoal')}
             inputAccessoryViewID={'done'}
             value={String(values.pageGoal)}
             placeholder="10"
@@ -92,7 +90,7 @@ export default class SettingsScreen extends React.Component {
           />
           <Line />
           <Input
-            label="Daily Reminder"
+            label={i18n.t('dailyReminder')}
             type="switch"
             value={values.reminderEnabled}
             onChange={v => {
@@ -110,6 +108,7 @@ export default class SettingsScreen extends React.Component {
           >
             <DatePickerIOS
               date={new Date(values.reminderTime)}
+              locale={locale}
               onDateChange={d => {
                 d.setSeconds(0);
                 setFieldValue('reminderTime', d);
@@ -118,11 +117,15 @@ export default class SettingsScreen extends React.Component {
             />
           </View>
         </InputGroup>
-        <Button onPress={handleSubmit} disabled={isSubmitting} title="Save" />
+        <Button
+          onPress={handleSubmit}
+          disabled={isSubmitting}
+          title={i18n.t('save')}
+        />
         <Button
           onPress={this.handleOnReset}
           color="red"
-          title="RESET ALL DATA"
+          title={i18n.t('resetData')}
         />
         <DoneAccessory inputAccessoryViewID="done" />
       </View>
