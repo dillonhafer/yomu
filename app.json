@@ -5,9 +5,7 @@
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "scheme": "yomu",
-    "platforms": [
-      "ios"
-    ],
+    "platforms": ["ios"],
     "version": "1.0.0",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -32,8 +30,6 @@
         "usesNonExemptEncryption": false
       }
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["I18n/*.json", "**/*"]
   }
 }
