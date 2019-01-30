@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
@@ -45,10 +46,9 @@ export default class App extends React.Component {
     ]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = () => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
-    console.warn(error);
   };
 
   _handleFinishLoading = () => {
