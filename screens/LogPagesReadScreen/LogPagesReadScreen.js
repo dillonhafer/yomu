@@ -14,6 +14,7 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
+import { Reminder } from 'app/utils/PN';
 
 const dateString = date => {
   let d = date;
@@ -121,17 +122,10 @@ class LogPagesReadScreen extends Component {
     date.setDate(date.getDate() + 1);
 
     await Notifications.cancelAllScheduledNotificationsAsync();
-    await Notifications.scheduleLocalNotificationAsync(
-      {
-        title: '📖 Reading Reminder',
-        body: `📚 Don't forget to read today!!!`,
-        ios: { sound: true },
-      },
-      {
-        time: date,
-        repeat: 'day',
-      },
-    );
+    await Notifications.scheduleLocalNotificationAsync(Reminder, {
+      time: date,
+      repeat: 'day',
+    });
   };
 
   handleSubmit = async values => {

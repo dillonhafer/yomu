@@ -28,5 +28,9 @@
   "areYouSure": "This will erase everything. Are you sure?",
   "pageGoal": "Page Goal",
   "dailyReminder": "Daily Reminder",
-  "save": "Save"
+  "save": "Save",
+  "pn": {
+    "title": "📖 Reading Reminder",
+    "body": "📚 Don't forget to read today!!!"
+  }
 }

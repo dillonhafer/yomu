@@ -19,6 +19,7 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
+import { Reminder } from 'app/utils/PN';
 import { Permissions, Notifications } from 'expo';
 
 const settingsValidations = Yup.object().shape({
@@ -135,17 +136,10 @@ export default class SettingsScreen extends Component {
     ) {
       if (values.reminderEnabled) {
         await Notifications.cancelAllScheduledNotificationsAsync();
-        await Notifications.scheduleLocalNotificationAsync(
-          {
-            title: '📖 Reading Reminder',
-            body: `📚 Don't forget to read today!!!`,
-            ios: { sound: true },
-          },
-          {
-            time: values.reminderTime,
-            repeat: 'day',
-          },
-        );
+        await Notifications.scheduleLocalNotificationAsync(Reminder, {
+          time: values.reminderTime,
+          repeat: 'day',
+        });
       } else {
         await Notifications.cancelAllScheduledNotificationsAsync();
       }
