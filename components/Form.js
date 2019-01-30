@@ -10,7 +10,8 @@ import {
   InputAccessoryView,
   Keyboard,
 } from 'react-native';
-import Device from 'app/utils/Device';
+import Layout from 'app/constants/Layout';
+const { isTablet } = Layout;
 
 export const DoneAccessory = ({
   inputAccessoryViewID,
@@ -126,7 +127,7 @@ export class Input extends Component {
 }
 
 export const FormikContainer = ({ children, maxHeight = 300 }) => {
-  const style = Device.isTablet()
+  const style = isTablet
     ? [styles.formContainerBase, styles.formContainerTablet, { maxHeight }]
     : styles.formContainerBase;
 

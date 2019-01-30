@@ -5,7 +5,7 @@ import {
   LOG_PAGES,
   LOAD_BOOKS,
   BOOK_DELETED,
-} from '../constants/action-types';
+} from 'app/constants/action-types';
 
 const initialState = {
   books: [],

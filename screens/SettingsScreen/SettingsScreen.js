@@ -18,7 +18,7 @@ import {
 } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Reminder } from 'app/utils/PN';
+import { Reminder } from 'app/constants/PN';
 import { Permissions, Notifications } from 'expo';
 
 const settingsValidations = Yup.object().shape({
