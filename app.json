@@ -5,9 +5,7 @@
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "scheme": "yomu",
-    "platforms": [
-      "ios"
-    ],
+    "platforms": ["ios"],
     "version": "1.0.0",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -18,8 +16,11 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "locales": {
+      "ja": "./languages/japanese.json"
+    },
     "ios": {
-      "buildNumber": "3",
+      "buildNumber": "4",
       "supportsTablet": true,
       "bundleIdentifier": "com.dillonhafer.read",
       "appStoreUrl": "https://itunes.apple.com/us/app/reading-progress/id1450820446?mt=8",
@@ -32,9 +33,6 @@
         "usesNonExemptEncryption": false
       }
     },
-    "assetBundlePatterns": [
-      "I18n/*.json",
-      "**/*"
-    ]
+    "assetBundlePatterns": ["I18n/*.json", "**/*"]
   }
 }
