@@ -1,3 +1,3 @@
-# 読<ruby>よ</ruby>む
+# <ruby>読<rt>よ</rt></ruby>む
 
 Page based reading goals
