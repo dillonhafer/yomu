@@ -4,10 +4,15 @@ import { View, StyleSheet } from 'react-native';
 
 // FORM
 import { BarCodeScanner } from 'expo';
-import { InputGroup, Input, Line, Button } from 'app/components/Form';
+import {
+  FormikContainer,
+  InputGroup,
+  Input,
+  Line,
+  Button,
+} from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Device from 'app/utils/Device';
 
 const initialBookValues = {
   title: '',
@@ -143,34 +148,15 @@ class NewBookScreen extends Component {
   };
 
   render() {
-    const baseStyles = { backgroundColor: '#eee', flex: 1 };
-    const containerStyles = { flex: 1, backgroundColor: '#f6f6f6' };
-    const style = Device.isTablet()
-      ? [
-          baseStyles,
-          {
-            maxHeight: 250,
-            alignSelf: 'center',
-            marginVertical: 24,
-            borderRadius: 8,
-            borderColor: '#eee',
-            borderWidth: StyleSheet.hairlineWidth,
-            width: 450,
-          },
-        ]
-      : baseStyles;
-
     return (
-      <View style={containerStyles}>
-        <View style={style}>
-          <Formik
-            initialValues={initialBookValues}
-            onSubmit={this.handleSubmit}
-            validationSchema={bookValidations}
-            render={this.renderForm}
-          />
-        </View>
-      </View>
+      <FormikContainer>
+        <Formik
+          initialValues={initialBookValues}
+          onSubmit={this.handleSubmit}
+          validationSchema={bookValidations}
+          render={this.renderForm}
+        />
+      </FormikContainer>
     );
   }
 }

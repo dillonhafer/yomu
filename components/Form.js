@@ -10,6 +10,7 @@ import {
   InputAccessoryView,
   Keyboard,
 } from 'react-native';
+import Device from 'app/utils/Device';
 
 export const DoneAccessory = ({
   inputAccessoryViewID,
@@ -124,6 +125,18 @@ export class Input extends Component {
   }
 }
 
+export const FormikContainer = ({ children, maxHeight = 300 }) => {
+  const style = Device.isTablet()
+    ? [styles.formContainerBase, styles.formContainerTablet, { maxHeight }]
+    : styles.formContainerBase;
+
+  return (
+    <View style={styles.formContainer}>
+      <View style={style}>{children}</View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     paddingRight: 12,
@@ -169,5 +182,21 @@ const styles = StyleSheet.create({
     borderRightColor: '#fff',
     borderWidth: StyleSheet.hairlineWidth,
     paddingLeft: 12,
+  },
+  formContainer: {
+    flex: 1,
+    backgroundColor: '#f6f6f6',
+  },
+  formContainerBase: {
+    backgroundColor: '#eee',
+    flex: 1,
+  },
+  formContainerTablet: {
+    alignSelf: 'center',
+    marginVertical: 24,
+    borderRadius: 8,
+    borderColor: '#eee',
+    borderWidth: StyleSheet.hairlineWidth,
+    width: 450,
   },
 });

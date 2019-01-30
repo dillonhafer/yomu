@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert, StyleSheet, DatePickerIOS } from 'react-native';
+import { View, Text, Alert, DatePickerIOS } from 'react-native';
 import i18n, { locale } from 'app/I18n';
 
 import { Notifications } from 'expo';
@@ -10,10 +10,10 @@ import {
   Input,
   Line,
   Button,
+  FormikContainer,
 } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Device from 'app/utils/Device';
 import { Reminder } from 'app/utils/PN';
 
 const dateString = date => {
@@ -154,34 +154,15 @@ class LogPagesReadScreen extends Component {
     const isbn = this.props.navigation.getParam('isbn');
     const title = this.props.books.find(b => b.isbn === isbn).title;
 
-    const baseStyles = { backgroundColor: '#eee', flex: 1 };
-    const containerStyles = { flex: 1, backgroundColor: '#f6f6f6' };
-    const style = Device.isTablet()
-      ? [
-          baseStyles,
-          {
-            maxHeight: 450,
-            alignSelf: 'center',
-            marginVertical: 24,
-            borderRadius: 8,
-            borderColor: '#eee',
-            borderWidth: StyleSheet.hairlineWidth,
-            width: 450,
-          },
-        ]
-      : baseStyles;
-
     return (
-      <View style={containerStyles}>
-        <View style={style}>
-          <Formik
-            initialValues={{ ...initialBookValues, title, isbn }}
-            onSubmit={this.handleSubmit}
-            validationSchema={logValidations}
-            render={this.renderForm}
-          />
-        </View>
-      </View>
+      <FormikContainer maxHeight={450}>
+        <Formik
+          initialValues={{ ...initialBookValues, title, isbn }}
+          onSubmit={this.handleSubmit}
+          validationSchema={logValidations}
+          render={this.renderForm}
+        />
+      </FormikContainer>
     );
   }
 }

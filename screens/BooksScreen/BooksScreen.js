@@ -7,7 +7,6 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import Colors from 'app/constants/Colors';
 import HeaderIcon from 'app/components/HeaderIcon';
 import BookRow from './BookRow';
 
@@ -35,7 +34,7 @@ class BooksScreen extends React.Component {
     this.props.navigation.push('NewBook');
   };
 
-  keyExtractor = (book, index) => book.isbn;
+  keyExtractor = book => book.isbn;
 
   renderEmpty = () => (
     <View style={styles.emptyContainer}>
@@ -74,13 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  emptyText: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
-    color: Colors.activityIndicator,
   },
 });
 

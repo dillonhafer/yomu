@@ -4,7 +4,6 @@ import {
   LayoutAnimation,
   ActionSheetIOS,
   View,
-  StyleSheet,
   DatePickerIOS,
 } from 'react-native';
 
@@ -15,10 +14,10 @@ import {
   Line,
   Button,
   DoneAccessory,
+  FormikContainer,
 } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Device from 'app/utils/Device';
 import { Reminder } from 'app/utils/PN';
 import { Permissions, Notifications } from 'expo';
 
@@ -150,34 +149,15 @@ export default class SettingsScreen extends Component {
   };
 
   render() {
-    const baseStyles = { backgroundColor: '#eee', flex: 1 };
-    const containerStyles = { flex: 1, backgroundColor: '#f6f6f6' };
-    const style = Device.isTablet()
-      ? [
-          baseStyles,
-          {
-            maxHeight: 450,
-            alignSelf: 'center',
-            marginVertical: 24,
-            borderRadius: 8,
-            borderColor: '#eee',
-            borderWidth: StyleSheet.hairlineWidth,
-            width: 450,
-          },
-        ]
-      : baseStyles;
-
     return (
-      <View style={containerStyles}>
-        <View style={style}>
-          <Formik
-            initialValues={this.props.settings}
-            onSubmit={this.handleSubmit}
-            validationSchema={settingsValidations}
-            render={this.renderForm}
-          />
-        </View>
-      </View>
+      <FormikContainer maxHeight={450}>
+        <Formik
+          initialValues={this.props.settings}
+          onSubmit={this.handleSubmit}
+          validationSchema={settingsValidations}
+          render={this.renderForm}
+        />
+      </FormikContainer>
     );
   }
 }
