@@ -1,5 +1,22 @@
 {
+  "by": "by ",
+  "book": "Book",
   "books": "Books",
   "stats": "Stats",
-  "settings": "Settings"
+  "settings": "Settings",
+  "cancel": "Cancel",
+  "title": "Title",
+  "author": "Author",
+  "new": { "book": "New Book" },
+  "add": { "book": "Add Book" },
+  "edit": { "book": "Edit Book" },
+  "delete": { "book": "Delete Book" },
+  "update": { "book": "Update Book" },
+  "scanBarcode": "Scan Barcode",
+  "done": "Done",
+  "pagesRead": "Pages Read",
+  "pagesReadRequired": "Pages Read is required",
+  "logReading": "Log Reading",
+  "thanks": "Thanks",
+  "congrats": "🎉 You did it! 🎉"
 }

@@ -9,8 +9,8 @@ import {
 
 import Colors from 'app/constants/Colors';
 import { Octicons } from '@expo/vector-icons';
+import { weekDays } from 'app/I18n';
 
-const weekDays = ['S', 'M', 'T', 'W', 'R', 'F', 'S'];
 const dateString = date => {
   let d = date;
   if (typeof d === 'string') {

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import i18n from 'app/I18n';
 
 // FORM
 import { InputGroup, Input, Line, Button } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Device from 'app/utils/Device';
-
-const initialBookValues = {
-  title: '',
-  author: '',
-  isbn: '',
-};
 
 const bookValidations = Yup.object().shape({
   title: Yup.string().required('Title is required'),
@@ -48,7 +43,6 @@ class EditBookScreen extends Component {
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
   }) => {
     return (
       <View
@@ -56,11 +50,11 @@ class EditBookScreen extends Component {
           flex: 1,
         }}
       >
-        <InputGroup label="book">
+        <InputGroup label={i18n.t('book')}>
           <Input
-            label="Title"
+            label={i18n.t('title')}
+            placeholder={i18n.t('title')}
             value={values.title}
-            placeholder="Title"
             ref={input => {
               this.inputs['title'] = input;
             }}
@@ -75,9 +69,9 @@ class EditBookScreen extends Component {
           />
           <Line />
           <Input
-            label="Author"
             value={values.author}
-            placeholder="Author Name"
+            label={i18n.t('author')}
+            placeholder={i18n.t('author')}
             ref={input => {
               this.inputs['author'] = input;
             }}
@@ -95,11 +89,15 @@ class EditBookScreen extends Component {
         <Button
           onPress={handleSubmit}
           disabled={isSubmitting}
-          title="Update Book"
+          title={i18n.t('update.book')}
         />
 
         <View>
-          <Button color="red" onPress={this.handleDelete} title="Delete Book" />
+          <Button
+            color="red"
+            onPress={this.handleDelete}
+            title={i18n.t('delete.book')}
+          />
         </View>
       </View>
     );

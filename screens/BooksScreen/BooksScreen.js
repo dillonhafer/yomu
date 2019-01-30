@@ -1,12 +1,11 @@
 import React from 'react';
+import i18n from 'app/I18n';
 import {
   TouchableOpacity,
   View,
   Text,
   FlatList,
-  ActivityIndicator,
   StyleSheet,
-  ActionSheetIOS,
 } from 'react-native';
 import Colors from 'app/constants/Colors';
 import HeaderIcon from 'app/components/HeaderIcon';
@@ -15,8 +14,8 @@ import BookRow from './BookRow';
 class BooksScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Books',
-      headerBackTitle: 'Cancel',
+      title: i18n.t('books'),
+      headerBackTitle: i18n.t('cancel'),
       headerRight: (
         <TouchableOpacity
           style={{ paddingHorizontal: 20 }}
@@ -41,7 +40,7 @@ class BooksScreen extends React.Component {
   renderEmpty = () => (
     <View style={styles.emptyContainer}>
       <Text>You don't have any books yet!</Text>
-      <Text>Click + to add one</Text>
+      <Text>Press + to add one</Text>
     </View>
   );
 

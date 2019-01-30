@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import i18n from 'app/I18n';
+import { View, StyleSheet } from 'react-native';
 
 // FORM
-import { BarCodeScanner, Permissions } from 'expo';
+import { BarCodeScanner } from 'expo';
 import { InputGroup, Input, Line, Button } from 'app/components/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,10 +22,10 @@ const bookValidations = Yup.object().shape({
 });
 
 class NewBookScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     return {
       gesturesEnabled: false,
-      title: 'New Book',
+      title: i18n.t('new.book'),
       headerBackImage: (
         <View
           style={{
@@ -54,7 +55,6 @@ class NewBookScreen extends Component {
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
   }) => {
     return (
       <View
@@ -62,10 +62,10 @@ class NewBookScreen extends Component {
           flex: 1,
         }}
       >
-        <InputGroup label="book">
+        <InputGroup label={i18n.t('book')}>
           <Input
-            label="Title"
-            placeholder="Title"
+            label={i18n.t('title')}
+            placeholder={i18n.t('title')}
             value={values.title}
             ref={input => {
               this.inputs['title'] = input;
@@ -81,8 +81,8 @@ class NewBookScreen extends Component {
           />
           <Line />
           <Input
-            label="Author"
-            placeholder="Author Name"
+            label={i18n.t('author')}
+            placeholder={i18n.t('author')}
             onChangeText={handleChange('author')}
             value={values.author}
             ref={input => {
@@ -115,14 +115,14 @@ class NewBookScreen extends Component {
         <Button
           onPress={handleSubmit}
           disabled={isSubmitting}
-          title="Add Book"
+          title={i18n.t('add.book')}
         />
 
         <Button
           onPress={() => {
             this.setState({ scanBarCode: true });
           }}
-          title="Scan Barcode"
+          title={i18n.t('scanBarcode')}
         />
         {this.state.scanBarCode && (
           <BarCodeScanner

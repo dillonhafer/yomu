@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, StyleSheet, DatePickerIOS } from 'react-native';
+import i18n, { locale } from 'app/I18n';
 
 import { Notifications } from 'expo';
 // FORM
@@ -30,15 +31,15 @@ const initialBookValues = {
 const logValidations = Yup.object().shape({
   pagesRead: Yup.number()
     .min(1, 'You must read at least one page')
-    .required('Pages Read is required'),
+    .required(i18n.t('pagesReadRequired')),
   date: Yup.date().required('Date is required'),
 });
 
 class LogPagesReadScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     return {
       gesturesEnabled: false,
-      title: 'Log Reading',
+      title: i18n.t('logReading'),
       headerBackImage: (
         <View
           style={{
@@ -57,7 +58,6 @@ class LogPagesReadScreen extends Component {
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
     setFieldValue,
   }) => {
     return (
@@ -66,7 +66,7 @@ class LogPagesReadScreen extends Component {
           flex: 1,
         }}
       >
-        <InputGroup label="reading log">
+        <InputGroup label={i18n.t('logReading')}>
           <Text
             style={{
               marginTop: 12,
@@ -80,7 +80,7 @@ class LogPagesReadScreen extends Component {
           </Text>
           <Line />
           <Input
-            label="Pages Read"
+            label={i18n.t('pagesRead')}
             keyboardType="phone-pad"
             inputAccessoryViewID="done"
             value={values.pagesRead}
@@ -94,6 +94,7 @@ class LogPagesReadScreen extends Component {
           <Line />
           <DatePickerIOS
             date={values.date}
+            locale={locale}
             maximumDate={new Date()}
             mode="date"
             onDateChange={date => {
@@ -104,7 +105,7 @@ class LogPagesReadScreen extends Component {
         <Button
           onPress={handleSubmit}
           disabled={isSubmitting}
-          title="Log Reading"
+          title={i18n.t('logReading')}
         />
         <DoneAccessory inputAccessoryViewID="done" />
       </View>
@@ -144,8 +145,8 @@ class LogPagesReadScreen extends Component {
       if (dateString(values.date) === today) {
         if (currentPageCount + parseInt(values.pagesRead, 10) >= goal) {
           await this.rescheduleNotifications();
-          Alert.alert('🎉 You Did It! 🎉', 'You met your daily reading goal!', [
-            { text: 'Thanks' },
+          Alert.alert(i18n.t('congrats'), 'You met your daily reading goal!', [
+            { text: i18n.t('thanks') },
           ]);
         }
       }

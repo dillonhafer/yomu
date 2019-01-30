@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import i18n from 'app/I18n';
 import {
   Button as RNButton,
   View,
@@ -7,7 +8,6 @@ import {
   StyleSheet,
   Switch,
   InputAccessoryView,
-  DatePickerIOS,
   Keyboard,
 } from 'react-native';
 
@@ -18,12 +18,20 @@ export const DoneAccessory = ({
   <InputAccessoryView nativeID={inputAccessoryViewID}>
     <View
       style={{
-        backgroundColor: '#eee',
+        backgroundColor: '#f0f0f1',
         alignItems: 'flex-end',
         paddingRight: 12,
+        borderWidth: 1,
+        borderColor: '#f0f0f1',
+        borderTopColor: '#b9babd',
       }}
     >
-      <RNButton onPress={onPress} title="Done" />
+      <RNButton
+        onPress={onPress}
+        style={{ fontWeight: '700' }}
+        color="#157efb"
+        title={i18n.t('done')}
+      />
     </View>
   </InputAccessoryView>
 );

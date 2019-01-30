@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import i18n from 'app/I18n';
 import {
   TouchableOpacity,
   View,
@@ -16,8 +17,8 @@ class BookRow extends Component {
 
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        message: book.title,
-        options: ['Cancel', 'Edit Book', 'Log Pages Read'],
+        title: book.title,
+        options: [i18n.t('cancel'), i18n.t('edit.book'), i18n.t('logReading')],
         cancelButtonIndex: 0,
       },
       buttonIndex => {
@@ -27,6 +28,7 @@ class BookRow extends Component {
             break;
           case log:
             navigation.push('LogPagesRead', { isbn: book.isbn });
+            break;
           default:
         }
       },
@@ -38,18 +40,7 @@ class BookRow extends Component {
 
     return (
       <TouchableOpacity onPress={this.handleOnPress}>
-        <View
-          style={{
-            backgroundColor: '#fff',
-            borderColor: '#ccc',
-            borderRadius: 5,
-            borderWidth: 1,
-            margin: 8,
-            marginHorizontal: 16,
-            padding: 5,
-          }}
-          id={book.isbn}
-        >
+        <View style={styles.container} id={book.isbn}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ margin: 10, marginRight: 20 }}>
               <HeaderIcon name="ios-book" />
@@ -60,7 +51,8 @@ class BookRow extends Component {
                 {book.title}
               </Text>
               <Text style={{ fontSize: 13, color: '#777' }}>
-                by {book.author}
+                {i18n.t('by')}
+                {book.author}
               </Text>
             </View>
           </View>
@@ -72,8 +64,13 @@ class BookRow extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 5,
+    borderWidth: 1,
+    margin: 8,
+    marginHorizontal: 16,
+    padding: 5,
   },
 });
 
