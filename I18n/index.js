@@ -8,6 +8,8 @@ const translations = locale => {
   switch (locale) {
     case 'ja':
       return () => require('./jp.json');
+    case 'pt':
+      return () => require('./pt.json');
     case 'en':
     default:
       return () => require('./en.json');
