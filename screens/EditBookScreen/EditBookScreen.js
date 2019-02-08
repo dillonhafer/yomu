@@ -60,6 +60,7 @@ class EditBookScreen extends Component {
             label={i18n.t('title')}
             placeholder={i18n.t('title')}
             value={values.title}
+            autoCapitalize="words"
             ref={input => {
               this.inputs['title'] = input;
             }}
@@ -77,6 +78,7 @@ class EditBookScreen extends Component {
             value={values.author}
             label={i18n.t('author')}
             placeholder={i18n.t('author')}
+            autoCapitalize="words"
             ref={input => {
               this.inputs['author'] = input;
             }}

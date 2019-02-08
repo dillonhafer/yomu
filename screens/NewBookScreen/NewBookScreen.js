@@ -81,6 +81,7 @@ class NewBookScreen extends Component {
             onSubmitEditing={() => {
               this.focusNextField('author');
             }}
+            autoCapitalize="words"
             returnKeyType="next"
             onChangeText={handleChange('title')}
             onBlur={handleBlur('title')}
@@ -92,6 +93,7 @@ class NewBookScreen extends Component {
             label={i18n.t('author')}
             placeholder={i18n.t('author')}
             onChangeText={handleChange('author')}
+            autoCapitalize="words"
             value={values.author}
             ref={input => {
               this.inputs['author'] = input;
@@ -112,6 +114,7 @@ class NewBookScreen extends Component {
             ref={input => {
               this.inputs['isbn'] = input;
             }}
+            keyboardType="numeric"
             onSubmitEditing={handleSubmit}
             returnKeyType="done"
             onChangeText={handleChange('isbn')}
