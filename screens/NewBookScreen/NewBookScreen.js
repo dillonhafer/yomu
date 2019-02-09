@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import i18n from 'app/I18n';
-import { View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, View, StyleSheet } from 'react-native';
+import HeaderIcon from 'app/components/HeaderIcon';
 
 // FORM
-import { BarCodeScanner } from 'expo';
+import { ImagePicker, Permissions, BarCodeScanner } from 'expo';
 import {
   FormikContainer,
   InputGroup,
@@ -50,6 +51,28 @@ class NewBookScreen extends Component {
 
   inputs = {};
 
+  handleChangeImage = ({ setFieldValue, setFieldTouched }) => {
+    return () => {
+      const options = {
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        exif: false,
+      };
+
+      Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+        if (status === 'granted') {
+          ImagePicker.launchImageLibraryAsync(options).then(
+            ({ cancelled, uri }) => {
+              if (!cancelled) {
+                setFieldValue('image', { uri });
+                setFieldTouched('image', true);
+              }
+            },
+          );
+        }
+      });
+    };
+  };
+
   focusNextField = key => {
     this.inputs[key].focus();
   };
@@ -63,6 +86,7 @@ class NewBookScreen extends Component {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldTouched,
   }) => {
     return (
       <View
@@ -144,6 +168,38 @@ class NewBookScreen extends Component {
             style={StyleSheet.absoluteFill}
           />
         )}
+
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <TouchableOpacity
+            onPress={this.handleChangeImage({ setFieldValue, setFieldTouched })}
+          >
+            <View style={{ width: 100, height: 150 }}>
+              {!values.image && (
+                <View
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'white',
+                    width: 100,
+                    borderRadius: 5,
+                    height: 150,
+                  }}
+                >
+                  <HeaderIcon name="ios-book" />
+                </View>
+              )}
+              {values.image && (
+                <Image
+                  resizeMode="contain"
+                  style={{ width: 100, height: 150 }}
+                  source={values.image}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -155,7 +211,7 @@ class NewBookScreen extends Component {
 
   render() {
     return (
-      <FormikContainer>
+      <FormikContainer maxHeight={500}>
         <Formik
           initialValues={initialBookValues}
           onSubmit={this.handleSubmit}

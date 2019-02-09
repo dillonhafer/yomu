@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   ActionSheetIOS,
+  Image,
 } from 'react-native';
 import HeaderIcon from 'app/components/HeaderIcon';
 
@@ -43,7 +44,31 @@ class BookRow extends Component {
         <View style={styles.container} id={book.isbn}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ margin: 10, marginRight: 20 }}>
-              <HeaderIcon name="ios-book" />
+              <View style={{ width: 67, height: 100 }}>
+                {!book.image && (
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'white',
+                      borderWidth: 1,
+                      borderColor: '#ccc',
+                      width: 67,
+                      borderRadius: 5,
+                      height: 100,
+                    }}
+                  >
+                    <HeaderIcon name="ios-book" />
+                  </View>
+                )}
+                {book.image && (
+                  <Image
+                    resizeMode="contain"
+                    style={{ width: 67, height: 100 }}
+                    source={book.image}
+                  />
+                )}
+              </View>
             </View>
 
             <View style={{ flex: 1, paddingRight: 10 }}>

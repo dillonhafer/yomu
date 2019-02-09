@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import i18n from 'app/I18n';
+import { ImagePicker, Permissions } from 'expo';
 
 // FORM
 import {
@@ -36,6 +37,28 @@ class EditBookScreen extends Component {
 
   inputs = {};
 
+  handleChangeImage = ({ setFieldValue, setFieldTouched }) => {
+    return () => {
+      const options = {
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        exif: false,
+      };
+
+      Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+        if (status === 'granted') {
+          ImagePicker.launchImageLibraryAsync(options).then(
+            ({ cancelled, uri }) => {
+              if (!cancelled) {
+                setFieldValue('image', { uri });
+                setFieldTouched('image', true);
+              }
+            },
+          );
+        }
+      });
+    };
+  };
+
   focusNextField = key => {
     this.inputs[key].focus();
   };
@@ -48,6 +71,8 @@ class EditBookScreen extends Component {
     handleChange,
     handleBlur,
     handleSubmit,
+    setFieldValue,
+    setFieldTouched,
   }) => {
     return (
       <View
@@ -106,6 +131,24 @@ class EditBookScreen extends Component {
             title={i18n.t('delete.book')}
           />
         </View>
+
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <TouchableOpacity
+            onPress={this.handleChangeImage({ setFieldValue, setFieldTouched })}
+          >
+            <View style={{ width: 100, height: 150 }}>
+              {values.image && (
+                <Image
+                  resizeMode="contain"
+                  style={{ width: 100, height: 150 }}
+                  source={values.image}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -125,7 +168,7 @@ class EditBookScreen extends Component {
     const book = this.props.navigation.getParam('book');
 
     return (
-      <FormikContainer>
+      <FormikContainer maxHeight={500}>
         <Formik
           initialValues={book}
           onSubmit={this.handleSubmit}
