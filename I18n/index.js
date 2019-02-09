@@ -23,6 +23,7 @@ i18n.locale = locale;
 export const weekDays = {
   ja: ['日', '月', '火', '水', '木', '金', '土'],
   en: ['S', 'M', 'T', 'W', 'R', 'F', 'S'],
+  pt: ['Dom', '2ª', '3ª', '4ª', '5ª', '6ª', 'Sab'],
 }[localeShort];
 
 export default i18n;
