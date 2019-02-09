@@ -5,7 +5,9 @@
     "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "scheme": "yomu",
-    "platforms": ["ios"],
+    "platforms": [
+      "ios"
+    ],
     "version": "1.0.1",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -20,12 +22,16 @@
       "ja": "./languages/japanese.json"
     },
     "ios": {
-      "buildNumber": "5",
+      "buildNumber": "6",
       "supportsTablet": true,
       "bundleIdentifier": "com.dillonhafer.read",
       "appStoreUrl": "https://itunes.apple.com/us/app/reading-progress/id1450820446?mt=8",
       "infoPlist": {
-        "CFBundleLocalizations": ["en", "ja", "pt"],
+        "CFBundleLocalizations": [
+          "en",
+          "ja",
+          "pt"
+        ],
         "NSCameraUsageDescription": "yomu only uses the camera to allow you to scan book ISBN bar codes.",
         "NSPhotoLibraryUsageDescription": "yomu only uses the photo library to allow you to upload a book cover",
         "NSLocationAlwaysUsageDescription": "yomu does not use your location. We use Expo to build but we do not use the location APIs they provide."
@@ -34,6 +40,9 @@
         "usesNonExemptEncryption": false
       }
     },
-    "assetBundlePatterns": ["I18n/*.json", "**/*"]
+    "assetBundlePatterns": [
+      "I18n/*.json",
+      "**/*"
+    ]
   }
 }
