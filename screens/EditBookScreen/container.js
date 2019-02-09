@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateBook: book => dispatch(updateBook(book)),
+  updateBook: (book, originalISBN) => dispatch(updateBook(book, originalISBN)),
   deleteBook: book => dispatch(deleteBook(book)),
 });
 

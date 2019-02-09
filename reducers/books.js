@@ -36,7 +36,7 @@ export default function booksState(state = initialState, action) {
       return {
         ...state,
         books: state.books.map(b => {
-          if (b.isbn === action.book.isbn) {
+          if (b.isbn === action.originalISBN) {
             return action.book;
           }
           return b;

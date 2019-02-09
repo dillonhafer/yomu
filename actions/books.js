@@ -28,10 +28,11 @@ export const deleteBook = book => {
   };
 };
 
-export const updateBook = book => {
+export const updateBook = (book, originalISBN) => {
   return {
     type: BOOK_UPDATED,
     book,
+    originalISBN,
   };
 };
 

@@ -14,11 +14,14 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-const bookValidations = Yup.object().shape({
-  title: Yup.string().required('Title is required'),
-  author: Yup.string().required('Author is required'),
-  isbn: Yup.string().required('ISBN is required'),
-});
+const bookValidations = isbns =>
+  Yup.object().shape({
+    title: Yup.string().required('Title is required'),
+    author: Yup.string().required('Author is required'),
+    isbn: Yup.string()
+      .notOneOf(isbns, 'ISBN already in use')
+      .required('ISBN is required'),
+  });
 
 class EditBookScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -115,7 +118,21 @@ class EditBookScreen extends Component {
             touched={touched.author}
           />
           <Line />
-          <Input label="ISBN" editable={false} value={values.isbn} />
+          <Input
+            label="ISBN"
+            value={values.isbn}
+            placeholder="0000000000"
+            ref={input => {
+              this.inputs['isbn'] = input;
+            }}
+            keyboardType="numeric"
+            onSubmitEditing={handleSubmit}
+            returnKeyType="done"
+            onChangeText={handleChange('isbn')}
+            onBlur={handleBlur('isbn')}
+            errors={errors.isbn}
+            touched={touched.isbn}
+          />
         </InputGroup>
 
         <Button
@@ -160,7 +177,8 @@ class EditBookScreen extends Component {
   };
 
   handleSubmit = values => {
-    this.props.updateBook(values);
+    const { isbn } = this.props.navigation.getParam('book');
+    this.props.updateBook(values, isbn);
     this.props.navigation.goBack();
   };
 
@@ -172,7 +190,9 @@ class EditBookScreen extends Component {
         <Formik
           initialValues={book}
           onSubmit={this.handleSubmit}
-          validationSchema={bookValidations}
+          validationSchema={bookValidations(
+            this.props.books.filter(b => b.isbn !== book.isbn).map(b => b.isbn),
+          )}
           render={this.renderForm}
         />
       </FormikContainer>
