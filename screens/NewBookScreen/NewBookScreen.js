@@ -4,7 +4,7 @@ import { TouchableOpacity, Image, View, StyleSheet } from 'react-native';
 import HeaderIcon from 'app/components/HeaderIcon';
 
 // FORM
-import { ImagePicker, Permissions, BarCodeScanner } from 'expo';
+import { FileSystem, ImagePicker, Permissions, BarCodeScanner } from 'expo';
 import {
   FormikContainer,
   InputGroup,
@@ -63,8 +63,16 @@ class NewBookScreen extends Component {
           ImagePicker.launchImageLibraryAsync(options).then(
             ({ cancelled, uri }) => {
               if (!cancelled) {
-                setFieldValue('image', { uri });
-                setFieldTouched('image', true);
+                const urlParts = uri.split('/');
+                const fileName = urlParts[urlParts.length - 1];
+                const to = FileSystem.documentDirectory + fileName;
+                FileSystem.copyAsync({
+                  to,
+                  from: uri,
+                }).then(() => {
+                  setFieldValue('image', { uri: to });
+                  setFieldTouched('image', true);
+                });
               }
             },
           );
@@ -159,18 +167,14 @@ class NewBookScreen extends Component {
           }}
           title={i18n.t('scanBarcode')}
         />
-        {this.state.scanBarCode && (
-          <BarCodeScanner
-            onBarCodeScanned={({ data }) => {
-              this.setState({ scanBarCode: false });
-              setFieldValue('isbn', data);
-            }}
-            style={StyleSheet.absoluteFill}
-          />
-        )}
 
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          style={{
+            flex: 1,
+            opacity: this.state.scanBarCode ? 0 : 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           <TouchableOpacity
             onPress={this.handleChangeImage({ setFieldValue, setFieldTouched })}
@@ -200,6 +204,33 @@ class NewBookScreen extends Component {
             </View>
           </TouchableOpacity>
         </View>
+        {this.state.scanBarCode && (
+          <View style={StyleSheet.absoluteFill}>
+            <BarCodeScanner
+              onBarCodeScanned={({ data }) => {
+                this.setState({ scanBarCode: false });
+                setFieldValue('isbn', data);
+              }}
+              style={StyleSheet.absoluteFill}
+            />
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 20,
+                width: '100%',
+              }}
+            >
+              <Button
+                color="red"
+                onPress={() => {
+                  this.setState({ scanBarCode: false });
+                }}
+                title={i18n.t('cancel')}
+              />
+            </View>
+          </View>
+        )}
       </View>
     );
   };
