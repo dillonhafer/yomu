@@ -7,7 +7,7 @@ export const localeShort = locale.split('-')[0];
 const translations = locale => {
   switch (locale) {
     case 'ja':
-      return () => require('./jp.json');
+      return () => require('./ja.json');
     case 'pt':
       return () => require('./pt.json');
     case 'en':
@@ -20,10 +20,14 @@ i18n.fallbacks = true;
 i18n.translations = { [locale]: translations(localeShort)() };
 i18n.locale = locale;
 
-export const weekDays = {
-  ja: ['日', '月', '火', '水', '木', '金', '土'],
-  en: ['S', 'M', 'T', 'W', 'R', 'F', 'S'],
-  pt: ['Dom', '2ª', '3ª', '4ª', '5ª', '6ª', 'Sab'],
-}[localeShort];
+export const weekDays = [
+  i18n.t('weekDays.sun'),
+  i18n.t('weekDays.mon'),
+  i18n.t('weekDays.tue'),
+  i18n.t('weekDays.wed'),
+  i18n.t('weekDays.thu'),
+  i18n.t('weekDays.fri'),
+  i18n.t('weekDays.sat'),
+];
 
 export default i18n;

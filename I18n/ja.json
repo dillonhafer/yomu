@@ -1,4 +1,7 @@
 {
+  "NSCameraUsageDescription": "読むことはあなたが本ISBNバーコードをスキャンすることを可能にするためにカメラを使うだけです。",
+  "NSPhotoLibraryUsageDescription": "本の表紙をアップロードできるようにするために写真ライブラリのみを使用。",
+  "NSLocationAlwaysUsageDescription": "読むはあなたの場所を使用しません。",
   "by": "",
   "byJP": " で",
   "books": "本",
@@ -33,5 +36,14 @@
   "pn": {
     "title": "📖 念押し",
     "body": "📚 読むことを忘れないでください！！！"
+  },
+  "weekDays": {
+    "sun": "日",
+    "mon": "月",
+    "tue": "火",
+    "wed": "水",
+    "thu": "木",
+    "fri": "金",
+    "sat": "土"
   }
 }

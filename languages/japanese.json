@@ -1,5 +1,0 @@
-{
-  "NSCameraUsageDescription": "読むことはあなたが本ISBNバーコードをスキャンすることを可能にするためにカメラを使うだけです。",
-  "NSPhotoLibraryUsageDescription": "本の表紙をアップロードできるようにするために写真ライブラリのみを使用。",
-  "NSLocationAlwaysUsageDescription": "読むはあなたの場所を使用しません。"
-}

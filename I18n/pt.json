@@ -1,4 +1,7 @@
 {
+  "NSCameraUsageDescription": "O yomu usa apenas a câmera para permitir que você digitalize códigos de barras do ISBN.",
+  "NSPhotoLibraryUsageDescription": "O yomu usa apenas a biblioteca de fotos para permitir o upload de uma capa de livro.",
+  "NSLocationAlwaysUsageDescription": "yomu não usa sua localização. Usamos a Expo para criar, mas não usamos as APIs de localização que eles fornecem.",
   "by": "",
   "byJP": "",
   "book": "Livro",
@@ -33,5 +36,14 @@
   "pn": {
     "title": "📖 Lembrete de Leitura",
     "body": "📚 Não se esqueça de ler hoje!!!"
+  },
+  "weekDays": {
+    "sun": "Dom",
+    "mon": "2ª",
+    "tue": "3ª",
+    "wed": "4ª",
+    "thu": "5ª",
+    "fri": "6ª",
+    "sat": "Sab"
   }
 }
